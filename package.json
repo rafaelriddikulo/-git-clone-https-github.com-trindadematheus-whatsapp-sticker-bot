@@ -1,0 +1,17 @@
+{
+  "name": "wpp-sticker-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": {
+    "name": "Matheus Trindade",
+    "email": "trindadematheus27@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@mergulhao/wa-automate": "^3.0.31",
+    "gm": "^1.23.1",
+    "jimp": "^0.16.1",
+    "puppeteer": "^5.5.0",
+    "webp-converter": "^2.3.0"
+  }
+}
