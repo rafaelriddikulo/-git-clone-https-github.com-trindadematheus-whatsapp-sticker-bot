@@ -38,7 +38,7 @@ Agora toda imagem que você receber como mensagem privada o bot irá criar uma f
 
 ## Funcionalidades
 - [x] Receber imagem e retornar figurinha
-- [ ] Receber GIF e retornar figurinha animada
+- [x] Receber video e retornar figurinha animada
 
 <br/>
 
