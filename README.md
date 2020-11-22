@@ -1,1 +1,55 @@
+<div align="center">
+<img src="https://raw.githubusercontent.com/trindadematheus/whastapp-sticker-bot/master/assets/logo.png" width="128" height="128"/>
 
+# WhatsApp Sticker Bot
+
+> Criação de figurinhas instantaneamente pelo chat do WhatsApp
+</div>
+
+<br />
+
+## Rodando servidor localmente
+
+**1- Clone o projeto:**
+
+```bash
+> git clone https://github.com/trindadematheus/whastapp-sticker-bot.git
+> cd whatsapp-sticker-bot
+```
+
+**2- Instale as dependencias**
+
+```bash
+> yarn
+```
+
+**3- Rodando projeto**
+
+```bash
+> yarn dev:server
+```
+
+**4- Iniciando servidor e criando figurinhas**
+
+Vai aparecer um QRCode no terminal, faça o scan pela funcionalidade de WhatsApp WEB no celular.
+Agora toda imagem que você receber como mensagem privada o bot irá criar uma figurinha automaticamente.
+
+<br/>
+
+## Funcionalidades
+- [x] Receber imagem e retornar figurinha
+- [ ] Receber GIF e retornar figurinha animada
+
+<br/>
+
+---
+
+<br/>
+
+<p align="center">Feito com <b>♥</b> por <b>Matheus Trindade</b> diretamente de <b>Salvador-BA</b></p>
+
+<p align="center">
+  <a href="https://www.twitch.tv/trindabsc">Twitter</a> •
+  <a href="https://www.linkedin.com/in/trndd/">Linkedin</a> •
+  <a href="https://trndd.netlify.com/">Site</a>
+</p>
