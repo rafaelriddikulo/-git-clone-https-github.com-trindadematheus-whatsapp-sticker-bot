@@ -32,7 +32,11 @@
 **4- Iniciando servidor e criando figurinhas**
 
 Vai aparecer um QRCode no terminal, faça o scan pela funcionalidade de WhatsApp WEB no celular.
-Agora toda imagem que você receber como mensagem privada o bot irá criar uma figurinha automaticamente.
+Agora toda imagem/video que você receber como mensagem privada o bot irá criar uma figurinha automaticamente.
+
+> ⚠ **IMPORTANTE** você precisa ter instalado no computador o [FFmpeg](https://ffmpeg.org/), ele que faz a conversão do video em figurinha.
+
+> [Tutorial de instalação do FFmpeg no Windows](http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/)
 
 <br/>
 
