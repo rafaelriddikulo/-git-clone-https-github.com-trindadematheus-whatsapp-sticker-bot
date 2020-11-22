@@ -1,23 +1,15 @@
-import { decryptMedia, Client, Message } from '@mergulhao/wa-automate'
-import gm, { State } from 'gm'
-
-interface ImageType extends State {
-  sourceBuffer: String;
-}
+import { decryptMedia, Client, Message } from '@open-wa/wa-automate'
 
 export default async function CreateStickerFromImage(client: Client, message: Message) {
   const { mimetype, from, sender } = message;
 
   await client.sendText(
     from,
-    `*${sender.pushname}*, sua figurinha está pronta! 🤩`
+    `*${sender.pushname}*, sua figurinha está sendo criada, aguarde! 🤩`
   );
 
   const mediaData = await decryptMedia(message);
-  const image = <ImageType>gm(mediaData).resize(512, 512)
-
-  let buff = Buffer.from(image.sourceBuffer);
-  let base64data = buff.toString('base64');
+  let base64data = mediaData.toString('base64');
 
   await client.sendImageAsSticker(
     from,
