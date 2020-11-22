@@ -19,6 +19,8 @@ export default async function CreateStickerFromImage(client: Client, message: Me
   let buff = Buffer.from(image.sourceBuffer);
   let base64data = buff.toString('base64');
 
+  console.log(`Figurinha para ${sender.pushname}`)
+
   await client.sendImageAsSticker(
     from,
     `data:${mimetype};base64,${base64data}`
