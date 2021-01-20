@@ -6,6 +6,12 @@
 > Criação de figurinhas instantaneamente pelo chat do WhatsApp
 </div>
 
+<br/>
+
+<div align="center">
+  <img src="https://imgur.com/3hGZBuy.png" />
+</div>
+
 <br />
 
 ## Rodando servidor localmente
