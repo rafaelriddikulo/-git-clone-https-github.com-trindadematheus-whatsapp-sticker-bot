@@ -1,8 +1,12 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { ToastContainer } from 'react-toastify';
 
-import Connect from './page/Connect'
-import Global from './style/global'
+import GlobalStyles from './styles/global'
+import 'react-toastify/dist/ReactToastify.css'
+
+import { SocketProvider } from './hooks/socket';
+import Routes from './routes';
 
 const mainElement = document.createElement('div')
 
@@ -12,8 +16,11 @@ document.body.appendChild(mainElement)
 const App = () => {
   return (
     <>
-      <Connect />
-      <Global />
+      <SocketProvider>
+        <Routes />
+        <GlobalStyles />
+        <ToastContainer />
+      </SocketProvider>
     </>
   )
 }

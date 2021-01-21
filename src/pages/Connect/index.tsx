@@ -1,33 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 const remote = require('electron').remote;
-import io from 'socket.io-client'
 
 import logoImage from '../../../assets/logo.png'
+import { useSocket } from '../../hooks/socket';
 
 import * as S from './styles'
 
 const Connect: React.FC = () => {
-  const [qrCode, setQRCode] = useState('')
-
-  useEffect(() => {
-    const socketClient = io('http://localhost:3000/');
-
-    socketClient.on('QR_CODE', (data: any) => {
-      setQRCode(arrayBufferToBase64(data))
-    });
-  }, [])
-
-  function arrayBufferToBase64(buffer: ArrayBuffer) {
-    let binary = '';
-    let bytes = new Uint8Array(buffer);
-    let len = bytes.byteLength;
-
-    for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-
-    return window.btoa(binary);
-  }
+  const { qrCode } = useSocket()
 
   const handleClose = () => {
     remote.getCurrentWindow().close()
