@@ -17,13 +17,13 @@ const SocketContext = createContext<SocketContext | null>(null)
 export function SocketProvider({ children }: SocketProviderProps) {
   const [qrCode, setQRCode] = useState('')
 
-  useEffect(() => {
-    const socketClient = io('http://localhost:3000/')
+  // useEffect(() => {
+  //   const socketClient = io('http://localhost:3000/')
 
-    socketClient.on('QR_CODE', (data: any) => {
-      setQRCode(arrayBufferToBase64(data))
-    })
-  }, [])
+  //   socketClient.on('QR_CODE', (data: any) => {
+  //     setQRCode(arrayBufferToBase64(data))
+  //   })
+  // }, [])
 
   return (
     <SocketContext.Provider value={{ qrCode, setQRCode }}>
