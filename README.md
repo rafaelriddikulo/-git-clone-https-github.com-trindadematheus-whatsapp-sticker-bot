@@ -1,47 +1,65 @@
-## Electron + TypeScript + React
-Boilerplate for a project using Electron, React and Typescript
+<div align="center">
+<img src="https://raw.githubusercontent.com/trindadematheus/whastapp-sticker-bot/master/assets/logo.png" width="128" height="128"/>
 
-## Installation
+# WhatsApp Sticker Bot
 
-Use a package manager of your choice (npm, yarn, etc.) in order to install all dependencies
+> Criação de figurinhas instantaneamente pelo chat do WhatsApp
+</div>
 
-```bash
-npm install
-```
+<br/>
 
-```bash
-yarn install
-```
+<div align="center">
+  <img src="https://imgur.com/3hGZBuy.png" />
+</div>
 
-## Usage
-In order to run this project 2 scripts will need to be executed `dev:react` and `dev:electron`, run each one in a different terminal and always run `dev:react` before `dev:electron`, or `dev` to run them in order automatically
+<br />
 
-```bash
-npm run dev:react
-```
-```bash
-npm run dev:electron
-```
+## Rodando servidor localmente
 
-or
+**1- Clone o projeto:**
 
 ```bash
-npm run dev
+> git clone https://github.com/trindadematheus/whatsapp-sticker-bot.git
+> cd whatsapp-sticker-bot
 ```
 
-## Packaging
-To generate a project package run `package`
+**2- Instale as dependencias**
 
 ```bash
-npm run package
+> yarn
 ```
 
+**3- Rodando projeto**
 
+```bash
+> yarn dev:server
+```
 
-## Contributing
+**4- Iniciando servidor e criando figurinhas**
 
-Pull requests are always welcome 😃.
+Vai aparecer um QRCode no terminal, faça o scan pela funcionalidade de WhatsApp WEB no celular.
+Agora toda imagem/video que você receber como mensagem privada o bot irá criar uma figurinha automaticamente.
 
-## License
+> ⚠ **IMPORTANTE** você precisa ter instalado no computador o [FFmpeg](https://ffmpeg.org/), ele que faz a conversão do video em figurinha.
 
-[MIT](https://choosealicense.com/licenses/mit/)
+> [Tutorial de instalação do FFmpeg no Windows](http://blog.gregzaal.com/how-to-install-ffmpeg-on-windows/)
+
+<br/>
+
+## Funcionalidades
+- [x] Receber imagem e retornar figurinha
+- [x] Receber video e retornar figurinha animada
+
+<br/>
+
+---
+
+<br/>
+
+<p align="center">Feito com <b>♥</b> por <b>Matheus Trindade</b> diretamente de <b>Salvador-BA</b></p>
+
+<p align="center">
+  <a href="https://www.twitch.tv/trindabsc">Twitter</a> •
+  <a href="https://www.linkedin.com/in/trndd/">Linkedin</a> •
+  <a href="https://trndd.netlify.com/">Site</a>
+</p>
