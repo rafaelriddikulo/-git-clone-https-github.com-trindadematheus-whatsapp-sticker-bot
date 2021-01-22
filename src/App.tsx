@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
+import { BrowserRouter as Router } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 
 import GlobalStyles from './styles/global'
@@ -16,11 +17,13 @@ document.body.appendChild(mainElement)
 const App = () => {
   return (
     <>
-      <SocketProvider>
-        <Routes />
-        <GlobalStyles />
-        <ToastContainer />
-      </SocketProvider>
+      <Router>
+        <SocketProvider>
+          <Routes />
+          <GlobalStyles />
+          <ToastContainer />
+        </SocketProvider>
+      </Router>
     </>
   )
 }

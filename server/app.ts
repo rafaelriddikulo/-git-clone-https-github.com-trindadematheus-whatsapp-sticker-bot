@@ -4,12 +4,8 @@ import { Socket } from 'socket.io'
 import CreateStickerFromImage from './services/CreateStickerFromImage'
 import CreateAnimatedStickerFromVideo from './services/CreateAnimatedStickerFromVideo'
 
-export default function handleEvents(client: Client, socket: Socket) {
-  client.onStateChanged(state => {
-    if (state === 'CONNECTED') socket.emit('CONNECTED')
-
-    if (state === 'DISCONNECTED') socket.emit('DISCONNECTED')
-  });
+export default async function handleEvents(client: Client, socket: Socket) {
+  socket.emit('CONNECTED', await getUserData(client))
 
   client.onMessage(async message => {
     const { type, isGroupMsg } = message;
@@ -24,4 +20,14 @@ export default function handleEvents(client: Client, socket: Socket) {
       await CreateAnimatedStickerFromVideo(client, message);
     }
   });
+}
+
+async function getUserData(client: Client) {
+  const userData = await client.getMe()
+  const profilePic = await client.getProfilePicFromServer(userData.status)
+
+  return {
+    ...userData,
+    profile_url: profilePic
+  }
 }

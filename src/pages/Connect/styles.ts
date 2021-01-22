@@ -20,6 +20,7 @@ export const Container = styled.div`
     width: 250px;
     height: 250px;
     margin-bottom: 40px;
+    filter: saturate(0%)
   }
 
   h1 {

@@ -1,15 +1,20 @@
 import React from 'react';
 
 import WindowFrame from '../../components/WindowFrame';
+import { useSocket } from '../../hooks/socket';
 
 import * as S from './styles'
 
 const Connect: React.FC = () => {
+  const { qrCode } = useSocket()
+
   return (
     <S.Body>
       <WindowFrame />
       <S.Container>
-        <div id="qrcode" ></div>
+        <div id="qrcode" >
+          {qrCode && <img src={`data:image/png;base64,${qrCode}`} width="250" />}
+        </div>
 
         <div>
           <h1>Para usar o WhatsApp Sticker Bot</h1>
