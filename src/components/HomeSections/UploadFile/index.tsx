@@ -6,16 +6,30 @@ import * as S from './styles'
 import fileImage from '../../../../assets/files.svg'
 import { useSocket } from '../../../hooks/socket';
 
-const UploadFile: React.FC = () => {
-  const { sendImage } = useSocket()
+interface UploadFileProps {
+  setImage(img: string): void
+}
 
+const UploadFile: React.FC<UploadFileProps> = ({ setImage }) => {
   const {
     getRootProps,
     getInputProps,
   } = useDropzone({
     accept: 'image/*',
-    onDrop: files => sendImage(files[0])
+    onDrop: files => handleImage(files[0])
   });
+
+  const handleImage = (image: File) => {
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      if (reader.result) {
+        setImage(reader.result.toString())
+      }
+    };
+
+    reader.readAsDataURL(image);
+  }
 
   return (
     <S.Container>

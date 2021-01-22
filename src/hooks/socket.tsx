@@ -21,7 +21,7 @@ interface SocketContext {
   user: User
   setUser(user: User): void
   setQRCode(base64: string): void
-  sendImage(file: File): void
+  sendImage(file: string): void
 }
 
 const SocketContext = createContext<SocketContext | null>(null)
@@ -60,18 +60,12 @@ export function SocketProvider({ children }: SocketProviderProps) {
     })
   }
 
-  function sendImage(file: File) {
-    const reader = new FileReader();
+  function sendImage(file: string) {
+    socket.emit('CREATE_STICKER_UPLOAD', file)
 
-    reader.onloadend = () => {
-      socket.emit('CREATE_STICKER_UPLOAD', reader.result)
-
-      toast("Criando figurinha", {
-        position: toast.POSITION.TOP_RIGHT
-      });
-    };
-
-    reader.readAsDataURL(file);
+    toast("Criando figurinha", {
+      position: toast.POSITION.TOP_CENTER
+    });
   }
 
   return (

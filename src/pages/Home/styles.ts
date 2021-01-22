@@ -38,7 +38,7 @@ export const Menu = styled.div`
 `
 
 export const Body = styled.div`
-  padding: 20px;
+  padding: 0 20px;
 
   display: flex;
   flex: 1;

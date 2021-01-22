@@ -1,4 +1,4 @@
-import { decryptMedia, Client } from '@open-wa/wa-automate'
+import { Client } from '@open-wa/wa-automate'
 
 export default async function CreateStickerFromUpload(client: Client, file: string) {
   const userData = await client.getMe()

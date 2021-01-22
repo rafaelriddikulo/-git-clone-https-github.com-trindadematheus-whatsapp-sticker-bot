@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import UploadFile from '../../components/HomeSections/UploadFile';
 import WindowFrame from '../../components/WindowFrame';
+import CropImage from '../../components/HomeSections/CropImage';
 
 import { useSocket } from '../../hooks/socket';
 
 import * as S from './styles'
 
 const Home: React.FC = () => {
+  const [image, setImage] = useState('')
+
   const { user } = useSocket()
 
   return (
@@ -24,7 +27,7 @@ const Home: React.FC = () => {
       </S.Menu>
 
       <S.Body>
-        <UploadFile />
+        {image === '' ? <UploadFile setImage={setImage} /> : <CropImage image={image} setImage={setImage} />}
       </S.Body>
     </S.Container>
   );
