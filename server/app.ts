@@ -3,9 +3,14 @@ import { Socket } from 'socket.io'
 
 import CreateStickerFromImage from './services/CreateStickerFromImage'
 import CreateAnimatedStickerFromVideo from './services/CreateAnimatedStickerFromVideo'
+import CreateStickerFromUpload from "./services/CreateStickerFromUpload";
 
 export default async function handleEvents(client: Client, socket: Socket) {
   socket.emit('CONNECTED', await getUserData(client))
+
+  socket.on('CREATE_STICKER_UPLOAD', (file) => {
+    CreateStickerFromUpload(client, file)
+  })
 
   client.onMessage(async message => {
     const { type, isGroupMsg } = message;
