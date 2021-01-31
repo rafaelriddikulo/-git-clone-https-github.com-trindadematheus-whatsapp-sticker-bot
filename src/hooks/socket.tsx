@@ -15,6 +15,13 @@ interface User {
   status: string
   platform: string
   profile_url: string
+  phone: {
+    device_manufacturer: string
+    device_model: string
+  }
+  me: {
+    user: string
+  }
 }
 interface SocketContext {
   qrCode: string
@@ -35,7 +42,14 @@ export function SocketProvider({ children }: SocketProviderProps) {
     locale: '',
     status: '',
     platform: '',
-    profile_url: ''
+    profile_url: '',
+    phone: {
+      device_manufacturer: '',
+      device_model: ''
+    },
+    me: {
+      user: ''
+    }
   })
 
   const history = useHistory()

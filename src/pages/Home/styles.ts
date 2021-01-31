@@ -34,6 +34,18 @@ export const Menu = styled.div`
   h2 {
     font-size: 18px;
     color: #392408;
+    margin-bottom: 10px;
+  }
+`
+
+export const MenuItem = styled.div`
+  margin: 15px 0px;
+  color: rgba(57, 36, 6, 0.7);
+
+  display: flex;
+
+  span {
+    margin-left: 4px;
   }
 `
 
