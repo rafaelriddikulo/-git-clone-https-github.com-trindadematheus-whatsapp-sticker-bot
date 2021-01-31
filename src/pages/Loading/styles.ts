@@ -18,4 +18,10 @@ export const Container = styled.div`
   img {
     margin-bottom: 40px;
   }
+
+  span {
+    color: rgba(57, 36, 6, 0.7);
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
 `

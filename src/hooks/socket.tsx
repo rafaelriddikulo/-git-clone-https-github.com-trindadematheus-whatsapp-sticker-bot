@@ -1,41 +1,44 @@
-import React, { useState, createContext, useContext, useEffect } from 'react'
-import { useHistory } from "react-router-dom"
-import io from 'socket.io-client'
-import { toast } from 'react-toastify'
+import React, { useState, createContext, useContext, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import io from 'socket.io-client';
+import { toast } from 'react-toastify';
 
-import { arrayBufferToBase64 } from '../utils/buffertobase64'
+import { arrayBufferToBase64 } from '../utils/buffertobase64';
 
 interface SocketProviderProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 interface User {
-  pushname: string
-  locale: string
-  status: string
-  platform: string
-  profile_url: string
+  pushname: string;
+  locale: string;
+  status: string;
+  platform: string;
+  profile_url: string;
   phone: {
-    device_manufacturer: string
-    device_model: string
-  }
+    device_manufacturer: string;
+    device_model: string;
+  };
   me: {
-    user: string
-  }
+    user: string;
+  };
 }
 interface SocketContext {
-  qrCode: string
-  user: User
-  setUser(user: User): void
-  setQRCode(base64: string): void
-  sendImage(file: string): void
+  qrCode: string;
+  user: User;
+  startupText: string;
+  setStartupText(feedback: string): void;
+  setUser(user: User): void;
+  setQRCode(base64: string): void;
+  sendImage(file: string): void;
 }
 
-const SocketContext = createContext<SocketContext | null>(null)
+const SocketContext = createContext<SocketContext | null>(null);
 
 export function SocketProvider({ children }: SocketProviderProps) {
-  const [qrCode, setQRCode] = useState('')
-  const [socket, setSocket] = useState<SocketIOClient.Socket>(io)
+  const [qrCode, setQRCode] = useState('');
+  const [startupText, setStartupText] = useState('');
+  const [socket, setSocket] = useState<SocketIOClient.Socket>(io);
 
   const [user, setUser] = useState({
     pushname: '',
@@ -45,56 +48,74 @@ export function SocketProvider({ children }: SocketProviderProps) {
     profile_url: '',
     phone: {
       device_manufacturer: '',
-      device_model: ''
+      device_model: '',
     },
     me: {
-      user: ''
-    }
-  })
+      user: '',
+    },
+  });
 
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
-    connect()
-  }, [])
+    connect();
+  }, []);
 
   function connect() {
-    const socketClient = io('http://localhost:3000/')
+    const socketClient = io('http://localhost:3000/');
 
-    setSocket(socketClient)
+    setSocket(socketClient);
 
     socketClient.on('QR_CODE', (data: any) => {
-      setQRCode(arrayBufferToBase64(data))
-      history.push("/connect")
-    })
+      setQRCode(arrayBufferToBase64(data));
+      history.push('/connect');
+    });
+
+    socketClient.on('STARTUP', (data: any) => {
+      setStartupText(data);
+
+      if (data === 'Reinjecting api') {
+        history.push('/');
+      }
+    });
 
     socketClient.on('CONNECTED', (data: User) => {
-      setUser(data)
-      history.push("/home")
-    })
+      setUser(data);
+      history.push('/home');
+    });
   }
 
   function sendImage(file: string) {
-    socket.emit('CREATE_STICKER_UPLOAD', file)
+    socket.emit('CREATE_STICKER_UPLOAD', file);
 
-    toast("Criando figurinha", {
-      position: toast.POSITION.TOP_CENTER
+    toast('Criando figurinha', {
+      position: toast.POSITION.TOP_CENTER,
     });
   }
 
   return (
-    <SocketContext.Provider value={{ user, setUser, qrCode, setQRCode, sendImage }}>
+    <SocketContext.Provider
+      value={{
+        user,
+        setUser,
+        qrCode,
+        setQRCode,
+        sendImage,
+        startupText,
+        setStartupText,
+      }}
+    >
       {children}
     </SocketContext.Provider>
-  )
+  );
 }
 
 export function useSocket(): SocketContext {
-  const context = useContext(SocketContext)
+  const context = useContext(SocketContext);
 
   if (!context) {
-    throw new Error('useSocket must be used within a SocketProvider')
+    throw new Error('useSocket must be used within a SocketProvider');
   }
 
-  return context
+  return context;
 }

@@ -25,9 +25,9 @@ io.on('connection', async (socket: any) => {
     socket.emit('QR_CODE', imageBuffer)
   });
 
-  // ev.on('STARTUP.**', (data) => {
-  //   if (data === 'SUCCESS') socket.emit('CONNECTED')
-  // });
+  ev.on('STARTUP.**', (data) => {
+    socket.emit('STARTUP', data)
+  });
 
   create({
     disableSpins: true,
