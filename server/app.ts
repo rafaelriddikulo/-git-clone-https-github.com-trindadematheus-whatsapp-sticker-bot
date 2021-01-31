@@ -13,15 +13,15 @@ export default async function handleEvents(client: Client, socket: Socket) {
   })
 
   client.onMessage(async message => {
-    const { type, isGroupMsg } = message;
+    const { type, caption } = message;
 
     // Generate sticker from an image
-    if (isGroupMsg === false && type === 'image') {
+    if (caption === '!fig' && type === 'image') {
       await CreateStickerFromImage(client, message);
     }
 
     // Generate an animated sticker from a video
-    if (isGroupMsg === false && type === 'video') {
+    if (caption === '!fig' && type === 'video') {
       await CreateAnimatedStickerFromVideo(client, message);
     }
   });

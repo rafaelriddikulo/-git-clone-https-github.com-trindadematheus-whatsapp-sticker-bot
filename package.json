@@ -16,7 +16,8 @@
     "build:react": "webpack --config webpack/react.webpack.js",
     "package": "npm-run-all build package:dist",
     "package:dist": "electron-builder --dir",
-    "test": "jest"
+    "test": "jest",
+    "commit": "git-cz"
   },
   "keywords": [],
   "author": "Matheus Trindade <trindadematheus27@gmail.com>",
@@ -45,7 +46,7 @@
     "commitizen": "^4.1.2",
     "cross-env": "^7.0.2",
     "css-loader": "^5.0.1",
-    "cz-conventional-changelog": "3.2.0",
+    "cz-conventional-changelog": "3.3.0",
     "electron": "^8.2.2",
     "electron-builder": "^22.7.0",
     "electron-devtools-installer": "^3.1.1",
@@ -94,6 +95,11 @@
     "styled-components": "^5.1.1",
     "svg-url-loader": "^7.1.1"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
   "build": {
     "appId": "your.id",
     "mac": {
@@ -111,5 +117,10 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
