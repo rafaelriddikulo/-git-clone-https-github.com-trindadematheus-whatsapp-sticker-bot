@@ -4,10 +4,10 @@ import WindowFrame from '../../components/WindowFrame';
 import logoImage from '../../../assets/logo.png';
 
 import * as S from './styles';
-import { useSocket } from '../../hooks/socket';
+import { useWAConnect } from '../../hooks/wa-connect';
 
 const Loading: React.FC = () => {
-  const { startupText } = useSocket();
+  const { startupText } = useWAConnect();
 
   return (
     <S.Body>

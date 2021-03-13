@@ -1,14 +1,14 @@
 import { Client } from "@open-wa/wa-automate";
-import { Socket } from 'socket.io'
+import { BrowserWindow, ipcMain } from 'electron'
 
 import CreateStickerFromImage from './services/CreateStickerFromImage'
 import CreateAnimatedStickerFromVideo from './services/CreateAnimatedStickerFromVideo'
 import CreateStickerFromUpload from "./services/CreateStickerFromUpload";
 
-export default async function handleEvents(client: Client, socket: Socket) {
-  socket.emit('CONNECTED', await getUserData(client))
+export default async function handleEvents(client: Client, mainWindow: BrowserWindow) {
+  mainWindow.webContents.send('CONNECTED', await getUserData(client))
 
-  socket.on('CREATE_STICKER_UPLOAD', (file) => {
+  ipcMain.on('CREATE_STICKER_UPLOAD', (event, file) => {
     CreateStickerFromUpload(client, file)
   })
 

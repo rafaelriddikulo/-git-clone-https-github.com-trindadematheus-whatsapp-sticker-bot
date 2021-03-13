@@ -1,31 +1,31 @@
-import React from 'react'
-import { render } from 'react-dom'
-import { BrowserRouter as Router } from "react-router-dom";
+import React from 'react';
+import { render } from 'react-dom';
+import { HashRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import GlobalStyles from './styles/global'
-import 'react-toastify/dist/ReactToastify.css'
+import GlobalStyles from './styles/global';
+import 'react-toastify/dist/ReactToastify.css';
 
-import { SocketProvider } from './hooks/socket';
+import { WAConnectProvider } from './hooks/wa-connect';
 import Routes from './routes';
 
-const mainElement = document.createElement('div')
+const mainElement = document.createElement('div');
 
-mainElement.setAttribute('id', 'root')
-document.body.appendChild(mainElement)
+mainElement.setAttribute('id', 'root');
+document.body.appendChild(mainElement);
 
 const App = () => {
   return (
     <>
       <Router>
-        <SocketProvider>
+        <WAConnectProvider>
           <Routes />
           <GlobalStyles />
           <ToastContainer />
-        </SocketProvider>
+        </WAConnectProvider>
       </Router>
     </>
-  )
-}
+  );
+};
 
-render(<App />, mainElement)
+render(<App />, mainElement);

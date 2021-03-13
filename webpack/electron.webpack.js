@@ -1,5 +1,5 @@
 const path = require('path')
-
+const nodeExternals = require('webpack-node-externals')
 const rootPath = path.resolve(__dirname, '..')
 
 module.exports = {
@@ -9,6 +9,7 @@ module.exports = {
   devtool: 'source-map',
   entry: path.resolve(rootPath, 'electron', 'main.ts'),
   target: 'electron-main',
+  externals: [nodeExternals()],
   module: {
     rules: [
       {
@@ -17,29 +18,6 @@ module.exports = {
         use: {
           loader: 'babel-loader'
         }
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-      },
-      {
-        test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: 'svg-url-loader',
-            options: {
-              limit: 10000,
-            },
-          },
-        ],
       },
     ]
   },

@@ -3,18 +3,28 @@ import * as path from 'path'
 import * as url from 'url'
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
 
+import startWaServer from './server'
+
 let mainWindow: Electron.BrowserWindow | null
 
 function createWindow() {
+  if (mainWindow) {
+    mainWindow.close();
+  }
+
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     frame: false,
-    backgroundColor: '#fff',
+    backgroundColor: '#FED245',
+    icon: path.join(__dirname, '/icon/icon.ico'),
     webPreferences: {
-      nodeIntegration: true
+      nodeIntegration: true,
+      webSecurity: false
     }
   })
+
+  startWaServer(mainWindow)
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:4000')
@@ -45,4 +55,5 @@ app.on('ready', createWindow)
         .catch((err) => console.log('An error occurred: ', err))
     }
   })
+
 app.allowRendererProcessReuse = true

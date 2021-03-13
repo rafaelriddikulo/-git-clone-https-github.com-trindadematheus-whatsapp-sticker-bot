@@ -1,11 +1,11 @@
 import React, { useState, createContext, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import io from 'socket.io-client';
 import { toast } from 'react-toastify';
+import { ipcRenderer } from 'electron';
 
 import { arrayBufferToBase64 } from '../utils/buffertobase64';
 
-interface SocketProviderProps {
+interface WAConnectProviderProps {
   children: React.ReactNode;
 }
 
@@ -23,7 +23,7 @@ interface User {
     user: string;
   };
 }
-interface SocketContext {
+interface WAConnectContext {
   qrCode: string;
   user: User;
   startupText: string;
@@ -33,12 +33,11 @@ interface SocketContext {
   sendImage(file: string): void;
 }
 
-const SocketContext = createContext<SocketContext | null>(null);
+const WAConnectContext = createContext<WAConnectContext | null>(null);
 
-export function SocketProvider({ children }: SocketProviderProps) {
+export function WAConnectProvider({ children }: WAConnectProviderProps) {
   const [qrCode, setQRCode] = useState('');
   const [startupText, setStartupText] = useState('');
-  const [socket, setSocket] = useState<SocketIOClient.Socket>(io);
 
   const [user, setUser] = useState({
     pushname: '',
@@ -62,16 +61,12 @@ export function SocketProvider({ children }: SocketProviderProps) {
   }, []);
 
   function connect() {
-    const socketClient = io('http://localhost:3000/');
-
-    setSocket(socketClient);
-
-    socketClient.on('QR_CODE', (data: any) => {
+    ipcRenderer.on('QR_CODE', (event, data: any) => {
       setQRCode(arrayBufferToBase64(data));
       history.push('/connect');
     });
 
-    socketClient.on('STARTUP', (data: any) => {
+    ipcRenderer.on('STARTUP', (event, data: any) => {
       setStartupText(data);
 
       if (data === 'Reinjecting api') {
@@ -79,14 +74,14 @@ export function SocketProvider({ children }: SocketProviderProps) {
       }
     });
 
-    socketClient.on('CONNECTED', (data: User) => {
+    ipcRenderer.on('CONNECTED', (event, data: User) => {
       setUser(data);
       history.push('/home');
     });
   }
 
   function sendImage(file: string) {
-    socket.emit('CREATE_STICKER_UPLOAD', file);
+    ipcRenderer.emit('CREATE_STICKER_UPLOAD', file);
 
     toast('Criando figurinha', {
       position: toast.POSITION.TOP_CENTER,
@@ -94,7 +89,7 @@ export function SocketProvider({ children }: SocketProviderProps) {
   }
 
   return (
-    <SocketContext.Provider
+    <WAConnectContext.Provider
       value={{
         user,
         setUser,
@@ -106,15 +101,15 @@ export function SocketProvider({ children }: SocketProviderProps) {
       }}
     >
       {children}
-    </SocketContext.Provider>
+    </WAConnectContext.Provider>
   );
 }
 
-export function useSocket(): SocketContext {
-  const context = useContext(SocketContext);
+export function useWAConnect(): WAConnectContext {
+  const context = useContext(WAConnectContext);
 
   if (!context) {
-    throw new Error('useSocket must be used within a SocketProvider');
+    throw new Error('useWAConnect must be used within a WAConnectProvider');
   }
 
   return context;

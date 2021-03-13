@@ -32,7 +32,6 @@
 **[Servidor](https://github.com/trindadematheus/whatsapp-sticker-bot/tree/master/server)**
 
   - [Node](https://nodejs.org/en/)
-  - [SocketIO](https://socket.io/)
 
 **[APP Desktop](https://github.com/trindadematheus/whatsapp-sticker-bot/tree/master/src)**
   - [Electron](https://www.electronjs.org/)

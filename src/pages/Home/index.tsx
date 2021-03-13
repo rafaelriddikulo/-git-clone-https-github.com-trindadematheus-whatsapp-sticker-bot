@@ -5,14 +5,14 @@ import UploadFile from '../../components/HomeSections/UploadFile';
 import WindowFrame from '../../components/WindowFrame';
 import CropImage from '../../components/HomeSections/CropImage';
 
-import { useSocket } from '../../hooks/socket';
+import { useWAConnect } from '../../hooks/wa-connect';
 
 import * as S from './styles';
 
 const Home: React.FC = () => {
   const [image, setImage] = useState('');
 
-  const { user } = useSocket();
+  const { user } = useWAConnect();
 
   return (
     <S.Container>
