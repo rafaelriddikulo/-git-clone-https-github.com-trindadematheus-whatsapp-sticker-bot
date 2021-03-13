@@ -12,7 +12,7 @@ export default async function handleEvents(client: Client, mainWindow: BrowserWi
     CreateStickerFromUpload(client, file)
   })
 
-  client.onMessage(async message => {
+  client.onAnyMessage(async message => {
     const { type, caption } = message;
 
     // Generate sticker from an image

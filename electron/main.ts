@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import * as path from 'path'
 import * as url from 'url'
 import installExtension, { REACT_DEVELOPER_TOOLS, REDUX_DEVTOOLS } from 'electron-devtools-installer'
@@ -24,7 +24,7 @@ function createWindow() {
     }
   })
 
-  startWaServer(mainWindow)
+
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:4000')
@@ -42,6 +42,12 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+ipcMain.on('START_WA', () => {
+  if (mainWindow) {
+    startWaServer(mainWindow)
+  }
+})
 
 app.on('ready', createWindow)
   .whenReady()

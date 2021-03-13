@@ -58,6 +58,8 @@ export function WAConnectProvider({ children }: WAConnectProviderProps) {
 
   useEffect(() => {
     connect();
+    ipcRenderer.send('START_WA');
+    setStartupText('Starting WhatsApp Connection');
   }, []);
 
   function connect() {
@@ -81,7 +83,7 @@ export function WAConnectProvider({ children }: WAConnectProviderProps) {
   }
 
   function sendImage(file: string) {
-    ipcRenderer.emit('CREATE_STICKER_UPLOAD', file);
+    ipcRenderer.send('CREATE_STICKER_UPLOAD', file);
 
     toast('Criando figurinha', {
       position: toast.POSITION.TOP_CENTER,
