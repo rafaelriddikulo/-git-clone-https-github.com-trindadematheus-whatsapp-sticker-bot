@@ -101,9 +101,10 @@
     }
   },
   "build": {
-    "appId": "com.trindadematheus.whatsappstickerbot",
-    "mac": {
-      "category": "public.app-category.video"
+    "productName": "WhatsApp Sticker Bot",
+    "appId": "com.trindadematheus.whatsappsticker",
+    "dmg": {
+      "title": "WhatsApp Sticker Bot"
     },
     "directories": {
       "output": "packages"
@@ -111,7 +112,10 @@
     "files": [
       "package.json",
       "dist/**"
-    ]
+    ],
+    "win": {
+      "icon": "icon.ico"
+    }
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

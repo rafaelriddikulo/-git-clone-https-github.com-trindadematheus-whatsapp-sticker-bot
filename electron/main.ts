@@ -8,10 +8,6 @@ import startWaServer from './server'
 let mainWindow: Electron.BrowserWindow | null
 
 function createWindow() {
-  if (mainWindow) {
-    mainWindow.close();
-  }
-
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
@@ -20,11 +16,10 @@ function createWindow() {
     icon: path.join(__dirname, '/icon/icon.ico'),
     webPreferences: {
       nodeIntegration: true,
-      webSecurity: false
+      webSecurity: false,
+      nodeIntegrationInWorker: true
     }
   })
-
-
 
   if (process.env.NODE_ENV === 'development') {
     mainWindow.loadURL('http://localhost:4000')
