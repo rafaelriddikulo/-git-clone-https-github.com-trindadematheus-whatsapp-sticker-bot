@@ -30,6 +30,7 @@ export default async function startWaServer(mainWindow: BrowserWindow) {
   create({
     executablePath: exec,
     disableSpins: true,
-    useStealth: true
+    useStealth: true,
+    skipUpdateCheck: true
   }).then((client: Client) => handleEvents(client, mainWindow))
 }
