@@ -13,12 +13,12 @@
 
 <br />
 
-## 🤩 Download da aplicação
+##  Download da aplicação
 > Em breve
 
 <br />
 
-## 🌟 Funcionalidades
+##  Funcionalidades
 - [x] Receber imagem e retornar figurinha
 - [x] Receber video e retornar figurinha animada
 - [x] Aplicação desktop
@@ -27,7 +27,7 @@
 
 <br/>
 
-## 💻 Principais tecnologias
+## Principais tecnologias
 
 **[Servidor](https://github.com/trindadematheus/whatsapp-sticker-bot/tree/master/server)**
 
@@ -39,7 +39,7 @@
 
 <br/>
 
-## 🚀 Rodando servidor de desenvolvimento localmente
+## Rodando servidor de desenvolvimento localmente
 
 **1- Clone o projeto:**
 
